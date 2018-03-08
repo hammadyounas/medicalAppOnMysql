@@ -1,0 +1,124 @@
+<div>
+  <h2 mat-dialog-title>REPORT DETAIL</h2>
+  <hr>
+  <mat-dialog-content>
+    <div class="report-detail" *ngIf="!updateMode">
+      <div class="row">
+        <div class="col-sm-6">PATIENT NAME</div>
+        <div class="col-sm-6">{{data.pName}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">PATIENT CONTACT</div>
+        <div class="col-sm-6">{{data.pContact}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">PATIENT EMAIL</div>
+        <div class="col-sm-6">{{data.pEmail}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">PATIENT DISEASE</div>
+        <div class="col-sm-6">{{data.diseaseName}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">PATIENT GENDER</div>
+        <div class="col-sm-6">{{data.pGender}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">DELIVER DATE</div>
+        <div class="col-sm-6">{{data.deliverDate}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">ASSIGNED DOCTOR</div>
+        <div class="col-sm-6">{{data.assignedDoctor}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">PRICE</div>
+        <div class="col-sm-6">{{data.amount}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">REPORT CODE</div>
+        <div class="col-sm-6">{{data.reportCode}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 update-btn">
+          <button mat-raised-button color="primary" (click)="updateModeOn()">Update</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-detail" *ngIf="updateMode">
+      <form (ngSubmit)="updateReport()" #updateForm="ngForm" novalidate>
+        <div class="row">
+          <div class="col-sm-6">PATIENT NAME</div>
+          <div class="col-sm-6">
+            <mat-form-field class="input-width">
+              <input matInput placeholder="Patient Name is Required" [(ngModel)]="data.pName" #name="ngModel" id="name" name="name" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">PATIENT CONTACT</div>
+          <div class="col-sm-6">
+            <mat-form-field class="input-width">
+              <input matInput placeholder="Patient Contact is Required" [(ngModel)]="data.pContact" #pContact="ngModel" id="pContact" name="pContact"
+                required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">PATIENT EMAIL</div>
+          <div class="col-sm-6">
+            <mat-form-field class="input-width">
+              <input matInput placeholder="Patient Email is Required" [(ngModel)]="data.pEmail" #pEmail="ngModel" id="pEmail" name="pEmail" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">PATIENT DISEASE</div>
+          <div class="col-sm-6">
+            <mat-form-field class="input-width">
+              <input matInput placeholder="Patient Disease Name is Required" [(ngModel)]="data.diseaseName" #diseaseName="ngModel" id="diseaseName" name="diseaseName"
+                required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">DELIVER DATE</div>
+          <div class="col-sm-6">
+            <mat-form-field class="input-width">
+              <input matInput [min]="minDate" [matDatepicker]="pickerr" placeholder="Pick a Report Deliver Date" [(ngModel)]="data.deliverDate" #deliverDate="ngModel" name="deliverDate">
+              <mat-datepicker-toggle matSuffix [for]="pickerr"></mat-datepicker-toggle>
+              <mat-datepicker #pickerr></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">PRICE</div>
+          <div class="col-sm-6">
+            <mat-form-field class="input-width">
+              <input matInput placeholder="Report Amount is Required" [(ngModel)]="data.amount" #amount="ngModel" name="amount" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">REPORT CODE</div>
+          <div class="col-sm-6">
+            <mat-form-field class="input-width">
+              <input matInput placeholder="Report Code is Required" [disabled]="true" [(ngModel)]="data.reportCode" #code="ngModel"  name="code"
+                required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 update-btn">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!updateForm.form.valid">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button (click)="onCloseCancel()">Cancel</button>
+  </mat-dialog-actions>
+</div>

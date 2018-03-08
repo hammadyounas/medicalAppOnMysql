@@ -1,0 +1,74 @@
+<app-general-nav></app-general-nav>
+<div class="container">
+  <br>
+  <h2>Get Your Report</h2>
+  <form class="search-form">
+    <mat-form-field class="full-width">
+      <input type="search" [(ngModel)]="reportCode" name="reportCode" matInput placeholder="Wrire Your Report Code">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="search()">Get Report</button>
+  </form>
+  <br>
+  <div class="alert alert-info" role="alert" *ngIf="alert">
+    <strong>Sorry! </strong> Your Report is not Diagnosed now
+  </div>
+
+  <div *ngIf="report.isDiagnosed">
+    <div class="row detail">
+      <div class="alert alert-warning col-sm-12" role="alert">
+          <strong>Diagnosed!</strong> {{report.diagnosisDesc}}
+      </div>
+    </div>
+
+    <div class="row detail">
+      <div class="col-sm-6">Patient Name</div>
+      <div class="col-sm-6">{{report.pName}}</div>
+    </div>
+    <hr>
+    <div class="row detail">
+      <div class="col-sm-6">Disease Name</div>
+      <div class="col-sm-6">{{report.diseaseName}}</div>
+    </div>
+    <hr>
+    <div class="row detail">
+      <div class="col-sm-6">Patient Name</div>
+      <div class="col-sm-6">{{report.pEmail}}</div>
+    </div>
+    <hr>
+    <div class="row detail">
+      <div class="col-sm-6">Patient Address</div>
+      <div class="col-sm-6">{{report.pAddress}}</div>
+    </div>
+    <hr>
+    <div class="row detail">
+      <div class="col-sm-6">Patient Age</div>
+      <div class="col-sm-6">{{report.pAge}}</div>
+    </div>
+    <hr>
+    <div class="row detail">
+      <div class="col-sm-6">Patient Date of Birth</div>
+      <div class="col-sm-6">{{report.pDob}}</div>
+    </div>
+    <hr>
+    <div class="row detail">
+      <div class="col-sm-6">Patient Contact Number</div>
+      <div class="col-sm-6">{{report.pContact}}</div>
+    </div>
+    <hr>
+    <div class="row detail">
+      <div class="col-sm-6">Patient Gender</div>
+      <div class="col-sm-6">{{report.pGender}}</div>
+    </div>
+    <hr>
+    <div class="row detail">
+      <div class="col-sm-6">Report Recipt Date</div>
+      <div class="col-sm-6">{{report.reciptDate}}</div>
+    </div>
+    <hr>
+    <div class="row detail">
+      <div class="col-sm-6">Report Deliver Date</div>
+      <div class="col-sm-6">{{report.deliverDate}}</div>
+    </div>
+    <hr>
+  </div>
+</div>

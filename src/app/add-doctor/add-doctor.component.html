@@ -1,0 +1,110 @@
+<app-admin-nav></app-admin-nav>
+
+<div class="container">
+  <mat-card>
+    <mat-card-title>Add Doctor</mat-card-title>
+    <mat-card-content>
+
+      <form [formGroup]="collectorForm" (ngSubmit)="addCollector(collectorForm.value)" novalidate>
+
+        <mat-form-field class="input-width">
+          <input matInput placeholder="Write Doctor Name" formControlName="name" [(ngModel)]="doctor.name">
+          <mat-error *ngIf="!collectorForm.controls['name'].valid && collectorForm.controls['name'].touched">
+            Doctor Name Required and must be Contain 3 to 30 character
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <input matInput placeholder="Write Doctor Email Address" formControlName="email" [(ngModel)]="doctor.email">
+          <mat-error *ngIf="!collectorForm.controls['email'].valid && collectorForm.controls['email'].touched || collectorForm.controls['email'].dirty">
+            Please enter a valid email address
+          </mat-error>
+        </mat-form-field>
+        <div class="alert alert-danger" role="alert" *ngIf="emailAlert">
+            <strong>Dublicate Email!</strong> This Email Address already Exist in your Employees.
+          </div>
+        <br>
+        <mat-form-field class="input-width">
+          <input type="text" matInput placeholder="Write Doctor Salary" formControlName="salary" [(ngModel)]="doctor.salary">
+          <mat-error *ngIf="!collectorForm.controls['salary'].valid && collectorForm.controls['salary'].touched">
+            Doctor Salary Required
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <mat-select placeholder="Select Doctor Qualification" formControlName="qualification" [(ngModel)]="doctor.qualification"
+            multiple>
+            <mat-option *ngFor="let degree of drDegrees" [value]="degree">{{degree}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="!collectorForm.controls['qualification'].valid && collectorForm.controls['qualification'].touched">
+            Select Doctor Qualification
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <mat-select placeholder="Select Gender" formControlName="gender" [(ngModel)]="doctor.gender">
+            <mat-option *ngFor="let gender of genders" [value]="gender.value">
+              {{ gender.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="!collectorForm.controls['gender'].valid && collectorForm.controls['gender'].touched">
+            Select Doctor Gender
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <input type="number" matInput placeholder="Write Doctor Contact Number" formControlName="contact" [(ngModel)]="doctor.contact"
+            required>
+          <mat-error *ngIf="!collectorForm.controls['contact'].valid && collectorForm.controls['contact'].touched">
+            Doctor Contact is Required and must be contain 11 digits
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <input matInput placeholder="Write Doctor Address" formControlName="address" [(ngModel)]="doctor.address" required>
+          <mat-error *ngIf="!collectorForm.controls['address'].valid && collectorForm.controls['address'].touched">
+            Doctor Address Required
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <input matInput [matDatepicker]="picker" placeholder="Choose Date of Birth" formControlName="dob" [(ngModel)]="doctor.dob">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+          <mat-error *ngIf="!collectorForm.controls['dob'].valid && collectorForm.controls['dob'].touched">
+            Please Pick Date of Birth
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <input type="number" matInput placeholder="Write Doctor Age" formControlName="age" [(ngModel)]="doctor.age" required>
+          <mat-error *ngIf="!collectorForm.controls['age'].valid && collectorForm.controls['age'].touched">
+            Doctor Age is Required
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <mat-select placeholder="Select Branch" formControlName="branchName" [(ngModel)]="doctor.branchName">
+            <mat-option *ngFor="let branchName of branchNames" [value]="branchName.value">
+              {{ branchName.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="!collectorForm.controls['branchName'].valid && collectorForm.controls['branchName'].touched">
+            Select Branch Name
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="input-width">
+          <input matInput placeholder="Enter Doctor password" formControlName="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="doctor.password" required>
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-error *ngIf="!collectorForm.controls['password'].valid && collectorForm.controls['password'].touched">
+            Write Doctor Password
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <button style="float:right" mat-raised-button color="primary" [disabled]="!collectorForm.valid">Add Doctor</button>
+      </form>
+      <br>
+      <button mat-raised-button color="primary" (click)="writeDummyData()">Write Dummy Data</button>
+    </mat-card-content>
+  </mat-card>
+</div>

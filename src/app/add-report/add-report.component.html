@@ -1,0 +1,113 @@
+<app-collector-nav></app-collector-nav>
+
+<div class="container">
+
+  <mat-card id="top">
+    <mat-card-title>Add Report</mat-card-title>
+    <mat-card-content>
+
+      <form [formGroup]="reportForm" (ngSubmit)="addReport(reportForm.value)" novalidate>
+
+        <mat-form-field class="input-width">
+          <input matInput placeholder="Write Patient Name" formControlName="name" [(ngModel)]="report.name">
+          <mat-error *ngIf="!reportForm.controls['name'].valid && reportForm.controls['name'].touched">
+            Patient Name Required and must be Contain 3 to 30 character
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <input matInput placeholder="Write Doctor Email Address" formControlName="email" [(ngModel)]="report.email">
+          <mat-error *ngIf="!reportForm.controls['email'].valid && reportForm.controls['email'].touched || reportForm.controls['email'].dirty">
+            Please enter a valid email address
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <mat-select placeholder="Select Patient Gender" formControlName="gender" [(ngModel)]="report.gender">
+            <mat-option *ngFor="let gender of genders" [value]="gender.value">
+              {{ gender.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <input type="text" matInput placeholder="Write Patient Contact Number" formControlName="contact" [(ngModel)]="report.contact"
+            required>
+          <mat-error *ngIf="!reportForm.controls['contact'].valid && reportForm.controls['contact'].touched ">
+            Patient Contact Number is Required and must be contain 11 digits
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <input matInput placeholder="Write Patient Address" formControlName="address" [(ngModel)]="report.address" required>
+          <mat-error *ngIf="!reportForm.controls['address'].valid && reportForm.controls['address'].touched">
+            Patient Address Required
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <input matInput [matDatepicker]="picker" placeholder="Choose Patient Date of Birth" formControlName="dob" [(ngModel)]="report.dob">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+          <mat-error *ngIf="!reportForm.controls['dob'].valid && reportForm.controls['dob'].touched">
+            Please Pick Patient Date of Birth
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <input type="number" matInput placeholder="Write Patient Age" formControlName="age" [(ngModel)]="report.age" required>
+          <mat-error *ngIf="!reportForm.controls['age'].valid && reportForm.controls['age'].touched">
+            Patient Age is Required
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <mat-select placeholder="Assign Doctor" formControlName="assignedDoctor" [(ngModel)]="report.assignedDoctor">
+            <mat-option *ngFor="let doctor of doctors" [value]="doctor.value">
+              {{ doctor.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <input type="text" matInput placeholder="Write Patient Disease" formControlName="diseaseName" [(ngModel)]="report.diseaseName"
+            required>
+          <mat-error *ngIf="!reportForm.controls['diseaseName'].valid && reportForm.controls['diseaseName'].touched">
+            Patient Disease is Required
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <input matInput [min]="minDate" [matDatepicker]="pickerr" placeholder="Pick a Report Deliver Date" formControlName="deliverDate"
+            [(ngModel)]="report.deliverDate">
+          <mat-datepicker-toggle matSuffix [for]="pickerr"></mat-datepicker-toggle>
+          <mat-datepicker #pickerr></mat-datepicker>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <input type="text" matInput placeholder="Write Report Code" formControlName="code" [(ngModel)]="report.code" required>
+          <mat-error *ngIf="!reportForm.controls['code'].valid && reportForm.controls['code'].touched">
+            Report Code is Required
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-width">
+          <input type="text" matInput placeholder="Write Amount" formControlName="amount" [(ngModel)]="report.amount" required>
+          <mat-error *ngIf="!reportForm.controls['amount'].valid && reportForm.controls['amount'].touched">
+            Amount is Required
+          </mat-error>
+        </mat-form-field>
+          <div class="alert alert-success" *ngIf="isReportAddSuccess">
+            <strong>Congratulation!</strong> Report has been add successfully.
+          </div>
+          <div class="alert alert-danger" *ngIf="reportCodeCheck">
+              <strong>Alert!</strong> Kindly Check Report Code and Assigned Doctor.
+            </div>
+        <br>
+        <button style="float:right" mat-raised-button color="primary" [disabled]="!reportForm.valid">Submit</button>
+      </form>
+      <br>
+      <button mat-raised-button color="primary" (click)="writeDummyData()">Write Dummy Data</button>
+    </mat-card-content>
+  </mat-card>
+</div>

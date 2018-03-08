@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+  <a class="navbar-brand" [routerLink]="['/admin-dashboard']">Madical Lab</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/admin-dashboard/add-doctor']">Add Doctor<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/admin-dashboard/add-collector']">Add Collector<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/admin-dashboard/doctor-list']">Doctors List<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/admin-dashboard/collector-list']">Collectos List<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/admin-dashboard/report-list']">Report List<span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
+    <div class="form-inline my-2 my-lg-0">
+      <button mat-raised-button [routerLink]="['/']" (click)="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+

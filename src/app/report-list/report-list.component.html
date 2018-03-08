@@ -1,0 +1,122 @@
+<app-doctor-nav></app-doctor-nav>
+
+
+<div class="container">
+  <br>
+
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel *ngFor="let report of reports; let i = index" [expanded]="step === i" (opened)="setStep(i)" hideToggle="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{report.diseaseName}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{report.pName}} --- {{report.reciptDate}} --- {{report.deliverDate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <hr>
+
+      <div *ngIf="!diagnoseMode">
+        <div class="row detail">
+          <div class="col-sm-6">Patient Name</div>
+          <div class="col-sm-6">{{report.pName}}</div>
+        </div>
+        <hr>
+        <div class="row detail">
+          <div class="col-sm-6">Disease Name</div>
+          <div class="col-sm-6">{{report.diseaseName}}</div>
+        </div>
+        <hr>
+        <div class="row detail">
+          <div class="col-sm-6">Patient Name</div>
+          <div class="col-sm-6">{{report.pEmail}}</div>
+        </div>
+        <hr>
+        <div class="row detail">
+          <div class="col-sm-6">Patient Address</div>
+          <div class="col-sm-6">{{report.pAddress}}</div>
+        </div>
+        <hr>
+        <div class="row detail">
+          <div class="col-sm-6">Patient Age</div>
+          <div class="col-sm-6">{{report.pAge}}</div>
+        </div>
+        <hr>
+        <div class="row detail">
+          <div class="col-sm-6">Patient Date of Birth</div>
+          <div class="col-sm-6">{{report.pDob}}</div>
+        </div>
+        <hr>
+        <div class="row detail">
+          <div class="col-sm-6">Patient Contact Number</div>
+          <div class="col-sm-6">{{report.pContact}}</div>
+        </div>
+        <hr>
+        <div class="row detail">
+          <div class="col-sm-6">Patient Gender</div>
+          <div class="col-sm-6">{{report.pGender}}</div>
+        </div>
+        <hr>
+        <div class="row detail">
+          <div class="col-sm-6">Report Recipt Date</div>
+          <div class="col-sm-6">{{report.reciptDate}}</div>
+        </div>
+        <hr>
+        <div class="row detail">
+          <div class="col-sm-6">Report Deliver Date</div>
+          <div class="col-sm-6">{{report.deliverDate}}</div>
+        </div>
+        <hr>
+        <div class="row detail">
+            <div class="col-sm-6">Report Code</div>
+            <div class="col-sm-6">{{report.reportCode}}</div>
+          </div>
+          <hr>
+        <div class="row detail">
+          <div class="col-sm-12">
+            <button class="dia-btn" mat-raised-button color="accent" *ngIf="!report.isDiagnosed" (click)="diagnosedStart()">Click to Start Diagnosation Report</button>
+          </div>
+        </div>
+        <div class="row detail" *ngIf="report.isDiagnosed">
+          <div class="col-sm-12">
+            <div class="alert alert-warning">
+              <strong>Diagnose Description:</strong> {{report.diagnosisDesc}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="diagnoseMode">
+        <h3 style="text-align:center">Diagnosation Start</h3>
+        <form #diaForm="ngForm" novalidate>
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Write Diagnose Description" [(ngModel)]="diagnoseDesc" name="diagnoseDesc" #diaDesc="ngModel"
+              required minlength="30" maxlength="1000"></textarea>
+          </mat-form-field>
+          <div *ngIf="diaDesc.errors && (diaDesc.dirty || diaDesc.touched)" class="alert alert-danger">
+            <div [hidden]="!diaDesc.errors.required">Diagnosation Field is Required!</div>
+            <div [hidden]="!diaDesc.errors.minlength">Diagnosation must be at least 30 characters long.</div>
+            <div [hidden]="!diaDesc.errors.maxlength">Title cannot be more than 1000 characters long.</div>
+          </div>
+          <div class="row detail">
+            <div class="col-sm-12">
+              <button class="dia-btn" mat-raised-button [disabled]="!diaForm.form.valid" color="accent" (click)="diagnosedDone(i)">Done</button>
+            </div>
+          </div>
+          <br>
+          <div class="col-sm-12">
+            <button  mat-raised-button color="primary" (click)="writeDummyData()">Write Dummy Data</button>
+          </div>
+        </form>
+      </div>
+
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()" *ngIf="step != 0">Previous</button>
+        <button mat-button color="primary" (click)="nextStep()" *ngIf="step == reports.length-1">End</button>
+        <button mat-button color="primary" (click)="nextStep()" *ngIf="step != reports.length-1">Next</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+  </mat-accordion>
+
+</div>

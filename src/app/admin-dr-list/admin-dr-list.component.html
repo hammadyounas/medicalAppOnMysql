@@ -1,0 +1,35 @@
+<app-admin-nav></app-admin-nav>
+
+<div class="container">
+    <br>
+    <mat-card style="margin-bottom:5px; text-align:center">
+        <div class="row">
+            <div class="col-sm-3">
+                <strong>NAME</strong>
+            </div>
+            <div class="col-sm-3">
+                <strong>EMAIL</strong>
+            </div>
+            <div class="col-sm-2">
+                <strong>CONTACT</strong>
+            </div>
+            <div class="col-sm-2">
+                <strong>AGE</strong>
+            </div>
+            <div class="col-sm-2">
+                <strong>DETAIL</strong>
+            </div>
+        </div>
+    </mat-card>
+    <mat-card *ngFor="let doctor of doctorList; let i = index" class="card">
+        <div class="row">
+            <div class="col-sm-3">{{doctor.name}}</div>
+            <div class="col-sm-3">{{doctor.email}}</div>
+            <div class="col-sm-2">{{doctor.contact}}</div>
+            <div class="col-sm-2">{{doctor.age}}</div>
+            <div class="col-sm-2">
+                <button mat-raised-button color="accent" (click)="getDetail(i)">Detail</button>
+            </div>
+        </div>
+    </mat-card>
+</div>

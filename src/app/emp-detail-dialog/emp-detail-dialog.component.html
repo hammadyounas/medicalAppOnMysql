@@ -1,0 +1,116 @@
+<div>
+  <h2 mat-dialog-title>EMPLOYEE DETAIL</h2>
+  <hr>
+  <mat-dialog-content>
+    <div class="report-detail" *ngIf="!updateMode">
+      <div class="row">
+        <div class="col-sm-6">EMPLOYE NAME</div>
+        <div class="col-sm-6">{{data.name}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">EMPLOYE CONTACT</div>
+        <div class="col-sm-6">{{data.contact}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">EMPLOYE EMAIL</div>
+        <div class="col-sm-6">{{data.email}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">EMPLOYE ADDRESS</div>
+        <div class="col-sm-6">{{data.address}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">EMPLOYE GENDER</div>
+        <div class="col-sm-6">{{data.gender}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">EMPLOYE DOB</div>
+        <div class="col-sm-6">{{data.dob}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">EMPLOYE AGE</div>
+        <div class="col-sm-6">{{data.age}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">EMPLOYE SALARY</div>
+        <div class="col-sm-6">{{data.salary}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">EMPLOYE POST</div>
+        <div class="col-sm-6">{{data.post}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 update-btn">
+          <button mat-raised-button color="primary" (click)="updateModeOn()">Update</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-detail" *ngIf="updateMode">
+      <form (ngSubmit)="updateEmp()" #updateForm="ngForm" novalidate>
+        <div class="row">
+          <div class="col-sm-6">EMPLOYE NAME</div>
+          <div class="col-sm-6">
+            <mat-form-field class="input-width">
+              <input matInput placeholder="EMPLOYE Name is Required" [(ngModel)]="data.name" #name="ngModel" id="name" name="name" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">CONTACT NUMBER</div>
+          <div class="col-sm-6">
+            <mat-form-field class="input-width">
+              <input matInput placeholder="EMPLOYE Contact is Required" [(ngModel)]="data.contact" #contact="ngModel" id="contact" name="contact"
+                required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">EMAIL ADDRESS</div>
+          <div class="col-sm-6">
+            <mat-form-field class="input-width">
+              <input matInput placeholder="EMPLOYE Email is Required" [disabled]="true" [(ngModel)]="data.email" #email="ngModel" id="email" name="email"
+                required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">EMPLOYE AGE</div>
+          <div class="col-sm-6">
+            <mat-form-field class="input-width">
+              <input matInput placeholder="EMPLOYE Age is Required" [(ngModel)]="data.age" #age="ngModel" id="age" name="age" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">EMPLOYE SALARY</div>
+          <div class="col-sm-6">
+            <mat-form-field class="input-width">
+              <input matInput placeholder="Employee Salary" [(ngModel)]="data.salary" #salary="ngModel" name="salary" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">EMPLOYEE POST</div>
+          <div class="col-sm-6">
+            <mat-form-field class="input-width">
+              <input matInput placeholder="EMPLOYEE POST is Required" [disabled]="true" [(ngModel)]="data.post" #post="ngModel" name="post"
+                required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 update-btn">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!updateForm.form.valid">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button (click)="block()" color="warn" *ngIf="data.status">Block</button>
+    <button mat-raised-button (click)="unblock()" color="warn" *ngIf="!data.status">Unblock</button>
+    <button mat-raised-button (click)="onCloseCancel()">Cancel</button>
+  </mat-dialog-actions>
+</div>
